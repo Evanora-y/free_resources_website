@@ -1,85 +1,129 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <div class="container">
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+        <el-card class="card_main" shadow="always">
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+            <div class="title">今日猫粮盲盒</div>
+
+            <el-text>
+                每天领一些网盘资源(猫粮),日积月累就多啦,你喜欢的猫粮还在采集,也许明天就有啦!
+                <el-icon>
+                    <Bell />
+                </el-icon>
+            </el-text>
+            <br>
+            <el-button @click="isdisplay = true" class="star" type="warning" :icon="Star" circle />
+
+
+        </el-card>
+
+
     </div>
-  </header>
 
-  <RouterView />
+
+    <!-- 弹出层 -->
+    <el-dialog class="dialog" v-model="isdisplay" :show-close="false">
+
+        <el-card class="dialog_card" shadow="always">
+
+            <div>真好奇~里面会是什么呢？</div>
+
+
+            <el-popover :visible="visible" placement="top" :width="380">
+                <p>这里的资源链接每天都会更新哦，记得每天都来点一下~</p>
+                <template #reference>
+                    <el-button @click="accessing_resources()" class="star" type="warning" :icon="Star" circle />
+                </template>
+            </el-popover>
+
+
+
+            
+            <el-divider />
+            <div>联系我们:killianverenawn8488#gmail.com</div>
+            <div>均为公开资源，若不慎涉及版权，请立即联系我们！</div>
+        </el-card>
+
+
+
+    </el-dialog>
 </template>
 
+
+
+<script >
+export default {
+
+    data() {
+
+        return {
+
+            isdisplay: false,
+
+
+        }
+    },
+    methods:{
+        accessing_resources(){
+
+            this.isdisplay=false
+        }
+
+
+    }
+}
+
+
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
+.card_main {
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
+    height: 500px;
+    width: 1000px;
+    padding: 10px;
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+.container {
 
-  header .wrapper {
     display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+    justify-content: center;
+    align-items: center;
+}
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+.title {
 
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+    font-family: 'cat', sans-serif;
+    font-size: 50px;
+    margin-bottom: 20px;
+
+}
+
+.star {
+
+    margin-top: 20px;
+    height: 50px;
+    width: 50px;
+}
+
+.dialog_card {
+
+    height: 300px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
 }
 </style>
+
+<script setup>
+import { Bell, ElementPlus, Star } from '@element-plus/icons-vue'
+</script>
